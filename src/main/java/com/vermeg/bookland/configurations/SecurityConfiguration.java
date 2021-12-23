@@ -46,11 +46,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/signUp","/verify/**","/verification",
                         "/login","/signUp","/index","/home","/","/403",
-                        "/user/save","/forgotPassword","/changePassword").permitAll()
+                        "/user/save","/forgotPassword","/changePassword","/book/**","/stat/**","/category/**").permitAll()
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/book/**").hasRole("ADMIN")
-                .antMatchers("/category/**").hasRole("ADMIN")
+                //.antMatchers("/book/**").hasRole("ADMIN")
+                //.antMatchers("/category/**").hasRole("ADMIN")
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login")
