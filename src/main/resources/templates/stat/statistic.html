@@ -1,97 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" type="text/css" href="../styles/header.css">
-   <link rel="stylesheet" type="text/css" href="../styles/home.css">
-   <link rel="stylesheet" type="text/css" href="../styles/global.css">
-   
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/global.css}">
+
 </head>
 <body>
- <div class="navBar navBarOnTop" id="navBar" th:insert="/fragments/headers :: adminHeader"></div>
-	<div class="container">
-		<h2 align="center">Dashboard admin</h2>
+<div class="navBar navBarOnTop" id="navBar" th:insert="/fragments/headers :: adminHeader"></div>
+<div class="container">
+    <h2 align="center">Dashboard admin</h2>
 
-		<div class="row">
-			<div class="col-md-6" style="margin-top: 20px">
-				<div id="ventebybook" style="width: 100%; height: 400px;"></div>
-			</div>
-			<div class="col-md-6" style="margin-top: 20px">
-				<div id="chiffreAffaire" style="width: 100%; height: 400px;"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12" style="margin-top: 20px">
-				<div id="clients" style="width: 100%; height: 400px;"></div>
-			</div>
-			
-		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script th:inline="javascript">
-    $(function(){
-    Highcharts.chart('ventebybook', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Number book sales'
-        },
-
-        xAxis: {
-            categories: [[${map.keySet()}]],
-        },
-        yAxis: {
-           
+    <div class="row">
+        <div class="col-md-6" style="margin-top: 20px">
+            <div id="ventebybook" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px">
+            <div id="chiffreAffaire" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 20px">
+            <div id="clients" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+</div>
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
+    $(function () {
+        Highcharts.chart('ventebybook', {
+            chart: {
+                type: 'column'
+            },
             title: {
-                text: 'number'
-            }
-        },
+                text: 'Number book sales'
+            },
 
-        series: [{
-            name: 'book title',
-            data: [[${map.values()}]]
-        }]
-    });
-    });
-     $(function(){
-    Highcharts.chart('chiffreAffaire', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Total book sales per month / year'
-        },
+            xAxis: {
+                categories: [[${map.keySet()}]],
+            },
+            yAxis: {
 
-        xAxis: {
-            categories: [[${mapchif.keySet()}]],
-        },
-        yAxis: {
-           
+                title: {
+                    text: 'number'
+                }
+            },
+
+            series: [{
+                name: 'book title',
+                data: [[${map.values()}]]
+            }]
+        });
+    });
+    $(function () {
+        Highcharts.chart('chiffreAffaire', {
+            chart: {
+                type: 'line'
+            },
             title: {
-                text: 'sales $'
-            }
-        },
+                text: 'Total book sales per month / year'
+            },
 
-        series: [{
-            name: 'Total sales',
-            data: [[${mapchif.values()}]]
-        }]
+            xAxis: {
+                categories: [[${mapchif.keySet()}]],
+            },
+            yAxis: {
+
+                title: {
+                    text: 'sales $'
+                }
+            },
+
+            series: [{
+                name: 'Total sales',
+                data: [[${mapchif.values()}]]
+            }]
+        });
     });
-    });
-    
+
 </script>
 
 </body>
