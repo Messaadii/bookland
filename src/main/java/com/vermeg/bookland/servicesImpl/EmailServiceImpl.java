@@ -26,7 +26,11 @@ public class EmailServiceImpl implements EmailService {
     public void sendEmailUsingThymeleaf(String to, Map<String, Object> templateModel, String subject) throws MessagingException {
         Context contextThymeleaf = new Context();
         contextThymeleaf.setVariables(templateModel);
-        String htmlBody = thymeleafTemplateEngine.process("email/verification",contextThymeleaf);
+        String htmlBody="";
+        if(subject.equals("Confirm your email address"))
+            htmlBody = thymeleafTemplateEngine.process("email/verification",contextThymeleaf);
+        else if(subject.equals("Reset your password"))
+            htmlBody = thymeleafTemplateEngine.process("email/resetPassword",contextThymeleaf);
         sendHtmlMessage(to,htmlBody, subject);
     }
 
